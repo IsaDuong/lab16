@@ -51,10 +51,11 @@ class myApp(object):
         x1,y1,x2,y2 = drawpad.coords(enemy)
         px1,py1,px2,py2 = drawpad.coords(player)
 
-        if x2 > 800:
+        if x2<800:
             direction = - 5
-        elif x1 < 0:
+        elif x1>0:
             direction = 5
+            
         drawpad.move(enemy, direction, 0)
         drawpad.after(5,self.animate)
 
@@ -64,27 +65,24 @@ class myApp(object):
         global player
         global rocket1
         global rocket1Fired
-        if event.char == "w":
+        x1,y1,x2,y2 = drawpad.coords(enemy)
+        px1,py1,px2,py2 = drawpad.coords(player)
+        if event.char == "w" and py1<=600:
             drawpad.move(player,0,-10)
             drawpad.move(rocket1,0,-10)
-        if event.char == "a":
+        if event.char == "a" and px1>=0:
             drawpad.move(player,-10,0)
             drawpad.move(rocket1,-10,0)
-        if event.char == "d":
+        if event.char == "d" and px2<=800:
             drawpad.move(player,10,0)
             drawpad.move(rocket1,10,0)
-        if event.char == "s":
+        if event.char == "s" and py2>=0:
             drawpad.move(player,0,10)
             drawpad.move(rocket1,0,10)
             
-    
-    def collisionDetect(self, rocket):
-        global drawpad
-        global enemy
-        global rocket1Fired
-        rx1,ry1,rx2,ry2 = drawpad.coords(rocket)
-        ex1,ey1,ex2,ey2 = drawpad.coords(enemy)
-        if (rx1>=ex1 and rx2<=ex2) and (ry1>=ey1 and ry2<=ey2):
+
+
+            
             
         
 app = myApp(root)
